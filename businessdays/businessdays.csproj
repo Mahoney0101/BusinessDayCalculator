@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <Company>Mahoney0101</Company>
+    <Authors>Mahoney</Authors>
+    <PackageId>BusinessDays</PackageId>
+    <Product>AddRemoveBusinessDays</Product>
+    <Description>Add or subtract business days. Saturday and Sunday are considered Friday.</Description>
+  </PropertyGroup>
+
+</Project>
