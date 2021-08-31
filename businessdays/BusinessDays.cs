@@ -26,5 +26,43 @@ namespace businessdays
         {
             return AddBusinessDays(source, -businessDays);
         }
+
+        public static int BusinessDaysUntil(this DateTime firstDay, DateTime lastDay, params DateTime[] bankHolidays)
+        {
+            firstDay = firstDay.Date;
+            lastDay = lastDay.Date;
+            if (firstDay > lastDay)
+                throw new ArgumentException("Incorrect last day " + lastDay);
+
+            TimeSpan span = lastDay - firstDay;
+            int businessDays = span.Days + 1;
+            int fullWeekCount = businessDays / 7;
+            if (businessDays > fullWeekCount * 7)
+            {
+                int firstDayOfWeek = (int)firstDay.DayOfWeek;
+                int lastDayOfWeek = (int)lastDay.DayOfWeek;
+                if (lastDayOfWeek < firstDayOfWeek)
+                    lastDayOfWeek += 7;
+                if (firstDayOfWeek <= 6)
+                {
+                    if (lastDayOfWeek >= 7)
+                        businessDays -= 2;
+                    else if (lastDayOfWeek >= 6)
+                        businessDays -= 1;
+                }
+                else if (firstDayOfWeek <= 7 && lastDayOfWeek >= 7)
+                    businessDays -= 1;
+            }
+
+            businessDays -= fullWeekCount + fullWeekCount;
+            
+            foreach (DateTime bankHoliday in bankHolidays)
+            {
+                DateTime bh = bankHoliday.Date;
+                if (firstDay <= bh && bh <= lastDay)
+                    --businessDays;
+            }
+            return businessDays;
+        }
     }
 }
