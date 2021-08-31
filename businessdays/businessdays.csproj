@@ -6,7 +6,8 @@
     <Authors>Mahoney</Authors>
     <PackageId>BusinessDays</PackageId>
     <Product>AddRemoveBusinessDays</Product>
-    <Description>Add or subtract business days. Saturday and Sunday are considered Friday.</Description>
+    <Description>Add or subtract business days. Saturday and Sunday are considered Friday. Method to calculate business days in between two dates included.</Description>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
 </Project>
