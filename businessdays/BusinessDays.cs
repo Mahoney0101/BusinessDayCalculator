@@ -22,6 +22,7 @@ namespace businessdays
 
             return source.AddDays(businessDays + ((businessDays + dayOfWeek) / 5) * 2);
         }
+
         public static DateTime SubtractBusinessDays(this DateTime source, int businessDays)
         {
             return AddBusinessDays(source, -businessDays);
@@ -35,7 +36,7 @@ namespace businessdays
                 throw new ArgumentException("Incorrect last day " + lastDay);
 
             TimeSpan span = lastDay - firstDay;
-            int businessDays = span.Days + 1;
+            int businessDays = span.Days;
             int fullWeekCount = businessDays / 7;
             if (businessDays > fullWeekCount * 7)
             {
@@ -63,6 +64,18 @@ namespace businessdays
                     --businessDays;
             }
             return businessDays;
+        }
+
+        public static bool IsWeekday(this DateTime source)
+        {
+            var day = (int)source.DayOfWeek;
+
+            return day switch
+            {
+                0 => false,
+                6 => false,
+                _ => true,
+            };
         }
     }
 }
